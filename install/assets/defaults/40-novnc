@@ -1,4 +1,5 @@
 #!/command/with-contenv bash
 
+APP_ICON=${APP_ICON:-"/icons/novnc-32x32.png"}
 DISPLAY_MODE=${DISPLAY_MODE:-"scale"}
 NOVNC_LISTEN_PORT=${NOVNC_LISTEN_PORT:-"6080"}

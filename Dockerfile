@@ -1,4 +1,5 @@
 FROM tiredofit/nginx:alpine-edge
+LABEL maintainer="Dave Conroy (github.com/tiredofit)"
 
 ENV APP_USER=app \
     XDG_RUNTIME_DIR=/data \

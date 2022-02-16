@@ -30,4 +30,3 @@ silent /usr/bin/x11vnc \
                     -permitfiletransfer \
                     -tightfilexfer \
                     -rfbport ${VNC_LISTEN_PORT}
-

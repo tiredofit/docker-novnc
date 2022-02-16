@@ -37,15 +37,7 @@ This will build a Docker image for [NoVNC](https://github.com/novnc/noVNC), to a
   - [Persistent Storage](#persistent-storage)
   - [Environment Variables](#environment-variables)
     - [Base Images used](#base-images-used)
-    - [Authentication Options](#authentication-options)
-    - [Bot Blocking Options](#bot-blocking-options)
-    - [Logging Options](#logging-options)
-    - [Compression Options](#compression-options)
-    - [DDoS Options](#ddos-options)
-    - [Reverse Proxy Options](#reverse-proxy-options)
     - [Container Options](#container-options)
-    - [Functionality Options](#functionality-options)
-    - [Performance Options](#performance-options)
   - [Networking](#networking)
 - [Maintenance](#maintenance)
   - [Shell Access](#shell-access)
@@ -73,10 +65,10 @@ Builds of the image are available on [Docker Hub](https://hub.docker.com/r/tired
 
 The following image tags are available along with their tagged release based on what's written in the [Changelog](CHANGELOG.md):
 
-| Alpine Base | Tag            | Debian Base | Tag                |
-| ----------- | -------------- | ----------- | ------------------ |
-| latest      | `:latest`      | latest      | `:debian-latest`   |
-| edge        | `:alpine     ` | Bullseye    | `:debian`          |
+| Alpine Base | Tag            | Debian Base | Tag              |
+| ----------- | -------------- | ----------- | ---------------- |
+| latest      | `:latest`      | latest      | `:debian-latest` |
+| edge        | `:alpine     ` | Bullseye    | `:debian`        |
 
 ```bash
 docker pull tiredofit/novnc:(imagetag)
@@ -99,10 +91,10 @@ The container starts up and reads from `/etc/nginx/nginx.conf` for some basic co
 
 The following directories are used for configuration and can be mapped for persistent storage.
 
-| Directory   | Description                                                 |
-| ----------- | ----------------------------------------------------------- |
+| Directory   | Description                                                                         |
+| ----------- | ----------------------------------------------------------------------------------- |
 | `/data/ `   | Drop your Datafiles in this Directory to be utilized by the application in question |
-| `/www/logs` | Logfiles for Nginx error and Access                         |
+| `/www/logs` | Logfiles for Nginx error and Access                                                 |
 
 ### Environment Variables
 
@@ -112,48 +104,31 @@ This image relies on an [Alpine Linux](https://hub.docker.com/r/tiredofit/alpine
 
 Be sure to view the following repositories to understand all the customizable options:
 
-| Image                                                  | Description                            |
-| ------------------------------------------------------ | -------------------------------------- |
-| [OS Base](https://github.com/tiredofit/docker-alpine/) | Customized Image based on Alpine Linux |
-| [OS Base](https://github.com/tiredofit/docker-debian/) | Customized Image based on Debian Linux |
-| [Nginx](https://github.com/tiredofit/docker-nginx/) | Nginx webserver image based on either of the above OS |
+| Image                                                  | Description                                           |
+| ------------------------------------------------------ | ----------------------------------------------------- |
+| [OS Base](https://github.com/tiredofit/docker-alpine/) | Customized Image based on Alpine Linux                |
+| [OS Base](https://github.com/tiredofit/docker-debian/) | Customized Image based on Debian Linux                |
+| [Nginx](https://github.com/tiredofit/docker-nginx/)    | Nginx webserver image based on either of the above OS |
 
-#### Authentication Options
+#### Container Options
 
-Advanced - You can choose to request visitors be authenticated before accessing your site. Options are below.
+| Parameter           | Description                                  | Default    |
+| ------------------- | -------------------------------------------- | ---------- |
+| `RESOLUTION`        | Resolution of the Application via webbrowser | `1280x720` |
+| `NOVNC_LISTEN_PORT` | The Web browsing listening port              | `6080`     |
+| `VNC_LISTEN_PORT`   | The Web browsing listening port              | `5900`     |
+| `VNC_PASSWORD` | (optional) Basic Password for authentication | |
 
-| Parameter                                   | Description                                                                     | Default        |
-| ------------------------------------------- | ------------------------------------------------------------------------------- | -------------- |
-| `NGINX_AUTHENTICATION_TYPE`                 | Protect the site with `BASIC`, `LDAP`, `LLNG`                                   | `NONE`         |
-| `NGINX_AUTHENTICATION_TITLE`                | Challenge response when visiting protected site                                 | `Please login` |
-| `NGINX_AUTHENTICATION_BASIC_USER1`          | If `BASIC` chosen enter this for the username to protect site                   | `admin`        |
-| `NGINX_AUTHENTICATION_BASIC_PASS1`          | If `BASIC` chosen enter this for the password to protect site                   | `password`     |
-| `NGINX_AUTHENTICATION_BASIC_USER2`          | As above, increment for more users                                              |                |
-| `NGINX_AUTHENTICATION_BASIC_PASS2`          | As above, increment for more users                                              |                |
-| `NGINX_AUTHENTICATION_LDAP_HOST`            | Hostname and port number of LDAP Server - eg  `ldap://ldapserver:389`           |                |
-| `NGINX_AUTHENTICATION_LDAP_BIND_DN`         | User to Bind to LDAP - eg   `cn=admin,dc=orgname,dc=org`                        |                |
-| `NGINX_AUTHENTICATION_LDAP_BIND_PW`         | Password for Above Bind User - eg   `password`                                  |                |
-| `NGINX_AUTHENTICATION_LDAP_BASE_DN`         | Base Distringuished Name - eg `dc=hostname,dc=com`                              |                |
-| `NGINX_AUTHENTICATION_LDAP_ATTRIBUTE`       | Unique Identifier Attrbiute -ie  `uid`                                          |                |
-| `NGINX_AUTHENTICATION_LDAP_SCOPE`           | LDAP Scope for searching - eg  `sub`                                            |                |
-| `NGINX_AUTHENTICATION_LDAP_FILTER`          | Define what object that is searched for (ie  `objectClass=person`)              |                |
-| `NGINX_AUTHENTICATION_LDAP_GROUP_ATTRIBUTE` | If searching inside of a group what is the Group Attribute - eg  `uniquemember` |                |
-| `NGINX_AUTHENTICATION_LLNG_HANDLER_HOST`    | If `LLNG` chosen use hostname of handler                                        | `llng-handler` |
-| `NGINX_AUTHENTICATION_LLNG_HANDLER_PORT`    | If `LLNG` chosen use this port for handler                                      | `2884`         |
-| `NGINX_AUTHENTICATION_LLNG_ATTRIBUTE1`      | Syntax: HEADER_NAME, Variable, Upstream Variable - See note below               |                |
-| `NGINX_AUTHENTICATION_LLNG_ATTRIBUTE2`      | Syntax: HEADER_NAME, Variable, Upstream Variable - See note below               |                |
-
-When working with `NGINX_AUTHENTICATION_LLNG_ATTRIBUTE2` you will need to omit any `$` chracters from your string. It will be added in upon container startup. Example:
-`NGINX_AUTHENTICATION_LLNG_ATTRIBUTE1=HTTP_AUTH_USER,uid,upstream_http_uid` will get converted into `HTTP_AUTH_USER,$uid,$upstream_http_uid` and get placed in the appropriate areas in the configuration.
+** For more advanced authentication see the [Nginx](https://github.com/tiredofit/docker-nginx/) image.
 
 ### Networking
 
 The following ports are exposed.
 
-| Port | Description |
-| ---- | ----------- |
-| `5900` | VNC        |
-| `6080` | noVNC        |
+| Port   | Description |
+| ------ | ----------- |
+| `5900` | VNC         |
+| `6080` | noVNC       |
 
 * * *
 ## Maintenance
