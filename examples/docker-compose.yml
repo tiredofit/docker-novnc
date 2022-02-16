@@ -1,0 +1,35 @@
+version: '2.4'
+services:
+
+  novnc-app:
+    image: tiredofit/novnc:latest
+    container_name: novnc-app
+    ### This image is designed to be used behind a reverse proxy, othewise use the port declarations below - Route to Port 80
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.novnc-app.rule=Host(`novnc.example.com`)
+      - traefik.http.services.novnc-app.loadbalancer.server.port=80
+    #ports:
+      #- 6080:6080 ## If you want to go mainline to NOVnc through a browser
+      #- 5900:5900 ## If you want to use a VNC client to remote control instead of the browser
+      
+    volumes:
+      - ./data:/data
+    environment:
+      - CONTAINER_NAME=novnc-app
+      - CONTAINER_LOG_LEVEL=INFO
+      - USER_APP=1000
+      - GROUP_APP=1000
+      #-VNC_PASSWORD=simplepassword
+      #- NOVNC_LISTEN_PORT=6080
+      #- VNC_LISTEN_PORT=5900
+      #- NGINX_AUTHENTICATION_TYPE=BASIC
+      #- NGINX_AUTHENTICATION_BASIC_USER1=stronger
+      #- NGINX_AUTHENTICATION_BASIC_PASS1=password
+    networks:
+      - proxy
+    restart: always
+
+networks:
+  proxy:
+    external: true

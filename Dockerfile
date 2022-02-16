@@ -2,6 +2,7 @@ FROM tiredofit/nginx:alpine-edge
 
 ENV APP_USER=app \
     XDG_RUNTIME_DIR=/data \
+    CONTAINER_ENABLE_PERMISSIONS=TRUE \
     IMAGE_NAME=tiredofit/novnc \
     IMAGE_REPO_URL=https://github.com/tiredofit/docker-novnc
 
