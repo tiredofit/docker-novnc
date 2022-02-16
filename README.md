@@ -1,10 +1,10 @@
-# github.com/tiredofit/docker-nginx
+# github.com/tiredofit/docker-novnc
 
 
-[![GitHub release](https://img.shields.io/github/v/tag/tiredofit/docker-nginx?style=flat-square)](https://github.com/tiredofit/docker-nginx/releases/latest)
-[![Build Status](https://img.shields.io/github/workflow/status/tiredofit/docker-nginx/build?style=flat-square)](https://github.com/tiredofit/docker-nginx/actions?query=workflow%3Abuild)
-[![Docker Stars](https://img.shields.io/docker/stars/tiredofit/nginx.svg?style=flat-square&logo=docker)](https://hub.docker.com/r/tiredofit/nginx/)
-[![Docker Pulls](https://img.shields.io/docker/pulls/tiredofit/nginx.svg?style=flat-square&logo=docker)](https://hub.docker.com/r/tiredofit/nginx/)
+[![GitHub release](https://img.shields.io/github/v/tag/tiredofit/docker-novnc?style=flat-square)](https://github.com/tiredofit/docker-novnc/releases/latest)
+[![Build Status](https://img.shields.io/github/workflow/status/tiredofit/docker-novnc/build?style=flat-square)](https://github.com/tiredofit/docker-novnc/actions?query=workflow%3Abuild)
+[![Docker Stars](https://img.shields.io/docker/stars/tiredofit/novnc.svg?style=flat-square&logo=docker)](https://hub.docker.com/r/tiredofit/novnc/)
+[![Docker Pulls](https://img.shields.io/docker/pulls/tiredofit/novnc.svg?style=flat-square&logo=docker)](https://hub.docker.com/r/tiredofit/novnc/)
 [![Become a sponsor](https://img.shields.io/badge/sponsor-tiredofit-181717.svg?logo=github&style=flat-square)](https://github.com/sponsors/tiredofit)
 [![Paypal Donate](https://img.shields.io/badge/donate-paypal-00457c.svg?logo=paypal&style=flat-square)](https://www.paypal.me/tiredofit)
 
@@ -12,14 +12,11 @@
 
 ## About
 
-This will build a Docker image for [Nginx](https://www.nginx.org), for serving websites
+This will build a Docker image for [NoVNC](https://github.com/novnc/noVNC), to allow Linux GUI applications be displayed via a web browser
 
-*    Tracks Mainline release channel
-*    Many options configurable including compression, performance
-*    Includes Monitoring (nginx status) on port 73
-*    Includes [Nginx Ultimate Bad Bot Blocker](https://github.com/mitchellkrogza/nginx-ultimate-bad-bot-blocker)
-*    Logrotate Included to roll over log files at 23:59, compress and retain for 7 days
-*    Ability to Password Protect (Basic), LDAP Authenticate or use LemonLDAP:NG Handler
+
+*    Debian and Alpine Variants
+*    Ability to utilize authentication via various methods
 
 ## Maintainer
 
@@ -72,28 +69,17 @@ This will build a Docker image for [Nginx](https://www.nginx.org), for serving w
 Clone this repository and build the image with `docker build <arguments> (imagename) .`
 
 ### Prebuilt Images
-Builds of the image are available on [Docker Hub](https://hub.docker.com/r/tiredofit/nginx) and is the recommended method of installation.
+Builds of the image are available on [Docker Hub](https://hub.docker.com/r/tiredofit/novnc) and is the recommended method of installation.
 
 The following image tags are available along with their tagged release based on what's written in the [Changelog](CHANGELOG.md):
 
 | Alpine Base | Tag            | Debian Base | Tag                |
 | ----------- | -------------- | ----------- | ------------------ |
 | latest      | `:latest`      | latest      | `:debian-latest`   |
-| edge        | `:alpine-edge` | Bullseye    | `:debian-bullseye` |
-| 3.14        | `:alpine-3.14` | Buster      | `:debian-buster`   |
-| 3.13        | `:alpine-3.14` | Stretch     | `:debian-stretch`  |
-| 3.13        | `:alpine-3.13` | Jessie      | `:debian-jessie`   |
-| 3.12        | `:alpine-3.12` |             |                    |
-| 3.11        | `:alpine-3.11` |             |                    |
-| 3.10        | `:alpine-3.10` |             |                    |
-| 3.9         | `:alpine-3.9`  |             |                    |
-| 3.8         | `:alpine-3.8`  |             |                    |
-| 3.7         | `:alpine-3.7`  |             |                    |
-| 3.6         | `:alpine-3.6`  |             |                    |
-| 3.5         | `:alpine-3.5`  |             |                    |
+| edge        | `:alpine     ` | Bullseye    | `:debian`          |
 
 ```bash
-docker pull tiredofit/nginx:(imagetag)
+docker pull tiredofit/novnc:(imagetag)
 ```
 #### Multi Architecture
 Images are built primarily for `amd64` architecture, and may also include builds for `arm/v6`, `arm/v7`, `arm64` and others. These variants are all unsupported. Consider [sponsoring](https://github.com/sponsors/tiredofit) my work so that I can work with various hardware. To see if this image supports multiple architecures, type `docker manifest (image):(tag)`
@@ -115,8 +101,9 @@ The following directories are used for configuration and can be mapped for persi
 
 | Directory   | Description                                                 |
 | ----------- | ----------------------------------------------------------- |
-| `/www/html` | Drop your Datafiles in this Directory to be served by Nginx |
+| `/data/ `   | Drop your Datafiles in this Directory to be utilized by the application in question |
 | `/www/logs` | Logfiles for Nginx error and Access                         |
+
 ### Environment Variables
 
 #### Base Images used
@@ -129,10 +116,11 @@ Be sure to view the following repositories to understand all the customizable op
 | ------------------------------------------------------ | -------------------------------------- |
 | [OS Base](https://github.com/tiredofit/docker-alpine/) | Customized Image based on Alpine Linux |
 | [OS Base](https://github.com/tiredofit/docker-debian/) | Customized Image based on Debian Linux |
+| [Nginx](https://github.com/tiredofit/docker-nginx/) | Nginx webserver image based on either of the above OS |
 
 #### Authentication Options
 
-You can choose to request visitors be authenticated before accessing your site. Options are below.
+Advanced - You can choose to request visitors be authenticated before accessing your site. Options are below.
 
 | Parameter                                   | Description                                                                     | Default        |
 | ------------------------------------------- | ------------------------------------------------------------------------------- | -------------- |
@@ -158,132 +146,14 @@ You can choose to request visitors be authenticated before accessing your site. 
 When working with `NGINX_AUTHENTICATION_LLNG_ATTRIBUTE2` you will need to omit any `$` chracters from your string. It will be added in upon container startup. Example:
 `NGINX_AUTHENTICATION_LLNG_ATTRIBUTE1=HTTP_AUTH_USER,uid,upstream_http_uid` will get converted into `HTTP_AUTH_USER,$uid,$upstream_http_uid` and get placed in the appropriate areas in the configuration.
 
-#### Bot Blocking Options
-
-| Parameter                           | Description                                                                                                                                                                                                    | Default                                             |
-| ----------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------- |
-| `NGINX_BLOCK_BOTS_WHITELIST_DOMAIN` | Domains to whitelist from blocking comma seperated e.g. `example1.com,example2.com`                                                                                                                            |                                                     |
-| `NGINX_BLOCK_BOTS_WHITELIST_IP`     | IP Addresses/Networks to Whitelist from Blocking comma seperated                                                                                                                                               | `127.0.0.1,10.0.0.0/8,172.16.0.0/12,192.168.0.0/24` |
-| `NGINX_BLOCK_BOTS`                  | Bots to Block `ALL` `AOL` `BING` `DOCOMO` `DUCKDUCKGO` `FACEBOOK` `GOOGLE` `LINKEDIN` `MISC` `MSN` `SAMSUNG` `SLACK` `SLURP` `TWITTER` `WORDPRESS` `YAHOO` or `yourcustom-useragent` in Comma Seperated values |                                                     |
-| `NGINX_ENABLE_BLOCK_BOTS`           | Block Bots and Crawlers                                                                                                                                                                                        | `FALSE`                                             |
-
-For more details on how Bot Blocking works please visit [Nginx Ultimate Bad Bot Blocker](https://github.com/mitchellkrogza/nginx-ultimate-bad-bot-blocker)
-
-#### Logging Options
-
-| Parameter                    | Description                               | Default           |
-| ---------------------------- | ----------------------------------------- | ----------------- |
-| `NGINX_LOG_ACCESS_FILE`      | Nginx websites access logs                | `access.log`      |
-| `NGINX_LOG_ACCESS_LOCATION`  | Location inside container for saving logs | `/www/logs/nginx` |
-| `NGINX_LOG_ACCESS_FORMAT`    | Log Format `standard` or `json`           | `standard`        |
-| `NGINX_LOG_BLOCKED_FILE`     | If exploit protection `TRUE`              | `access.log`      |
-| `NGINX_LOG_BLOCKED_LOCATION` | Location inside container for saving logs | `/www/logs/nginx` |
-| `NGINX_LOG_BLOCKED_FORMAT`   | Log Format `standard` or `json`           | `standard`        |
-| `NGINX_LOG_ERROR_FILE`       | Nginx server and websites error log name  | `error.log`       |
-| `NGINX_LOG_ERROR_LOCATION`   | Location inside container for saving logs | `/www/logs/nginx` |
-| `NGINX_LOG_LEVEL_ERROR`      | How much verbosity to use with error logs | `warn`            |
-
-#### Compression Options
-
-Presently you can compress your served content with gzip and brotli. More compression options to come in future..
-
-| Parameter                             | Description                                  | Default                                                                                                  |
-| ------------------------------------- | -------------------------------------------- | -------------------------------------------------------------------------------------------------------- |
-| `NGINX_ENABLE_COMPRESSION_BROTLI`     | Enable Brotli Compression                    | `TRUE`                                                                                                   |
-| `NGINX_COMPRESSION_BROTLI_LEVEL`      | Compression Level for Brotli                 | `6`                                                                                                      |
-| `NGINX_COMPRESSION_BROTLI_MIN_LENGTH` | Minimum length of content before compressing | `20`                                                                                                     |
-| `NGINX_COMPRESSION_BROTLI_TYPES`      | What filetypes to compress                   | `text/plain text/css text/xml text/javascript application/x-javascript application/json application/xml` |
-| `NGINX_COMPRESSION_BROTLI_WINDOW`     |                                              | `512k`                                                                                                   |
-| `NGINX_ENABLE_COMPRESSION_GZIP`       | Enable GZIP Compression                      | `TRUE`                                                                                                   |
-| `NGINX_COMPRESSION_GZIP_BUFFERS`      |                                              | `16 8k`                                                                                                  |
-| `NGINX_COMPRESSION_GZIP_DISABLE`      | Don't compress for these user agents         | `MSIE [1-6].(?!.*SV1)`                                                                                   |
-| `NGINX_COMPRESSION_GZIP_HTTP_VERSION` |                                              | `1.1`                                                                                                    |
-| `NGINX_COMPRESSION_GZIP_LEVEL`        | Compression Level                            | `6`                                                                                                      |
-| `NGINX_COMPRESSION_GZIP_MIN_LENGTH`   | Minimum length of content before compressing | `10240`                                                                                                  |
-| `NGINX_COMPRESSION_GZIP_PROXIED`      |                                              | `expired no-cache no-store private auth`                                                                 |
-| `NGINX_COMPRESSION_GZIP_TYPES`        | Types of content to compress                 | `text/plain text/css text/xml text/javascript application/x-javascript application/json application/xml` |
-| `NGINX_COMPRESSION_GZIP_VARY`         |                                              | `TRUE`                                                                                                   |
-
-#### DDoS Options
-
-| Parameter                       | Description                        | Default |
-| ------------------------------- | ---------------------------------- | ------- |
-| `NGINX_ENABLE_DDOS_PROTECTION`  | Enable simple DDoS Protection      | `FALSE` |
-| `NGINX_DDOS_CONNECTIONS_PER_IP` | Limit amount of connections per IP | `10m`   |
-| `NGINX_DDOS_REQUESTS_PER_IP`    | Limit amount of requests per IP    | `5r/s`  |
-
-#### Reverse Proxy Options
-
-| Parameter                    | Description                                                       | Default           |
-| ---------------------------- | ----------------------------------------------------------------- | ----------------- |
-| `NGINX_ENABLE_FASTCGI_HTTPS` | Set fastcgi_param HTTPS 'on'                                      | `FALSE`           |
-| `NGINX_ENABLE_REVERSE_PROXY` | Helpers for when behind a reverse proxy                           | `TRUE`            |
-| `NGINX_REAL_IP_HEADER`       | What is the header passed containing the visitors IP              | `X-Forwarded-For` |
-| `NGINX_SET_REAL_IP_FROM`     | Set the network of your Docker Network if having IP lookup issues | `172.16.0.0/12`   |
-
-#### Container Options
-
-| Parameter                                | Description                                                                              | Default     |
-| ---------------------------------------- | ---------------------------------------------------------------------------------------- | ----------- |
-| `NGINX_ENABLE_APPLICATION_CONFIGURATION` | Don't automatically setup /etc/nginx/conf.d files - Useful for volume mapping/overriding | `TRUE`      |
-| `NGINX_ENABLE_CREATE_SAMPLE_HTML`        | If no index.html found - create a sample one to prove container works                    | `TRUE`      |
-| `NGINX_ENABLE_SITE_OPTIMIZATIONS`        | Deny access to some files and URLs, send caching tags                                    | `TRUE`      |
-| `NGINX_INCLUDE_CONFIGURATION`            | Include configuration in your website application file. eg `/www/website/nginx.conf`     |             |
-| `NGINX_RELOAD_ON_CONFIG_CHANGE`          | Automatically reload nginx on configuration file change                                  | `FALSE`     |
-| `NGINX_LISTEN_PORT`                      | Nginx listening port                                                                     | `80`        |
-| `NGINX_WEBROOT`                          | Where to serve content from inside the container                                         | `/www/html` |
-
-#### Functionality Options
-
-| Parameter                 | Description                                                                           | Default    |
-| ------------------------- | ------------------------------------------------------------------------------------- | ---------- |
-| `FORCE_RESET_PERMISSIONS` | Force setting Nginx files ownership to web server user                                | `TRUE`     |
-| `NGINX_MODE`              | Set to `NORMAL`, `MAINTENANCE` , `PROXY`, `REDIRECT`                                  | `NORMAL`   |
-| `NGINX_REDIRECT_URL`      | If `REDIRECT` set enter full url to forward all traffic to eg `https://example.com`   |            |
-| `NGINX_PROXY_URL`         | If `REDIRECT` set enter full url to proxy all traffic to eg `https://example.com:443` |            |
-| `NGINX_USER`              | What user to run nginx as inside container                                            | `nginx`    |
-| `NGINX_GROUP`             | What group to run nginx as inside container                                           | `www-data` |
-
-If set to `MAINTNENANCE` a single page will show visitors that the server is being worked on.
-
-You can also enter into the container and type `maintenance ARG`, where ARG is either `ON`,`OFF`, or `SLEEP (seconds)` which will temporarily place the site in maintenance mode and then restore it back to normal after time has passed.
-
-#### Performance Options
-
-| Parameter                                | Description                                                                             | Default  |
-| ---------------------------------------- | --------------------------------------------------------------------------------------- | -------- |
-| `NGINX_CLIENT_BODY_TIMEOUT`              | Request timed out                                                                       | `60`     |
-| `NGINX_ENABLE_EPOLL`                     | Optmized to serve many clients with each thread, essential for linux                    | `TRUE`   |
-| `NGINX_ENABLE_MULTI_ACCEPT`              | Accept as many connections as possible, may flood worker connections if set too low     | `TRUE`   |
-| `NGINX_ENABLE_RESET_TIMEDOUT_CONNECTION` | Allow the server to close connection on non responding client, this will free up memory | `TRUE`   |
-| `NGINX_ENABLE_SENDFILE`                  | Copies data between one FD and other from within the kernel                             | `TRUE`   |
-| `NGINX_ENABLE_SERVER_TOKENS`             | Show Nginx version on responses                                                         | `FALSE`  |
-| `NGINX_ENABLE_TCPNODELAY`                | Don't buffer data sent, good for small data bursts in real time                         | `TRUE`   |
-| `NGINX_ENABLE_TCPNOPUSH`                 | Send headers in one peace, its better then sending them one by one                      | `TRUE`   |
-| `NGINX_KEEPALIVE_REQUESTS`               | Number of requests client can make over keep-alive                                      | `100000` |
-| `NGINX_KEEPALIVE_TIMEOUT`                | Server will close connection after this time                                            | `75`     |
-| `NGINX_SEND_TIMEOUT`                     | If client stop responding, free up memory                                               | `60`     |
-| `NGINX_UPLOAD_MAX_SIZE`                  | Maximum Upload Size                                                                     | `2G`     |
-| `NGINX_WORKER_CONNECTIONS`               | Determines how much clients will be served per worker                                   | `1024`   |
-| `NGINX_WORKER_PROCESSES`                 | How many processes to spawn                                                             | `auto`   |
-| `NGINX_WORKER_RLIMIT_NOFILE`             | Number of file descriptors used for nginx                                               | `100000` |
-| `NGINX_ENABLE_OPEN_FILE_CACHE`           | Cache informations about FDs, frequently accessed files                                 | `TRUE`   |
-| `NGINX_ENABLE_OPEN_FILE_CACHE_ERRORS`    | Cache errors like 404                                                                   | `TRUE`   |
-| `NGINX_OPEN_FILE_CACHE_INACTIVE`         | Stop caching after inactive                                                             | `5m`     |
-| `NGINX_OPEN_FILE_CACHE_MAX`              | Maximum files to cache                                                                  | `200000` |
-| `NGINX_OPEN_FILE_CACHE_MIN_USES`         | Minimum uses of file before cashing                                                     | `2`      |
-| `NGINX_OPEN_FILE_CACHE_VALID`            | Cache a file if has been accessed within this window                                    | `2m`     |
-| `NGINX_CLIENT_BODY_BUFFER_SIZE`          | Client Buffer size                                                                      | `16k`    |
-| `NGINX_FASTCGI_BUFFERS`                  | Amount of FastCGI Buffers                                                               | `16 16k` |
-| `NGINX_FASTCGI_BUFFER_SIZE`              | FastCGI Buffer Size                                                                     | `32k`    |
-
 ### Networking
 
 The following ports are exposed.
 
 | Port | Description |
 | ---- | ----------- |
-| `80` | HTTP        |
+| `5900` | VNC        |
+| `6080` | noVNC        |
 
 * * *
 ## Maintenance
@@ -316,4 +186,4 @@ These images were built to serve a specific need in a production environment and
 MIT. See [LICENSE](LICENSE) for more details.
 ## References
 
-* https://nginx.org/
+* https://github.com/novnc/novnc/
