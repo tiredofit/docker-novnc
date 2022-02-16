@@ -1,0 +1,8 @@
+#!/command/with-contenv bash
+
+source /assets/functions/00-container
+PROCESS_NAME="openbox"
+
+prepare_service
+
+liftoff

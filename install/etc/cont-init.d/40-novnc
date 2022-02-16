@@ -1,0 +1,73 @@
+#!/command/with-contenv bash
+
+source /assets/functions/00-container
+PROCESS_NAME="novnc"
+
+prepare_service
+
+if var_true "${ENABLE_NGINX}" ; then
+    sed -i "s|<NOVNC_LISTEN_PORT>|${NOVNC_LISTEN_PORT}|g" /etc/nginx/conf.d/default.conf
+fi
+
+case ${DISPLAY_MODE,,} in
+    "scale" )
+        display_mode='<iframe src="vnc_lite.html?autoconnect=true&resize=scale"></iframe>'
+    ;;
+    "remote" )
+        display_mode='<iframe src="vnc_lite.html?autoconnect=true&resize=remote"></iframe>'
+    ;;
+    "off" )
+        display_mode='<iframe src="vnc_lite.html?autoconnect=true&resize=off"></iframe>'
+    ;;
+    "auto" | * )
+        display_mode='<iframe src="vnc_lite.html?autoconnect=true"></iframe>'
+    ;;
+esac
+
+cat > /usr/share/novnc/index.html <<EOF
+<!doctype html>
+<html lang="en">
+ <head>
+  <title>${IMAGE_NAME}</title>
+  <link rel="icon" href="app/images/soulseek.png">
+  <style>
+   html, body, iframe { margin:0; padding: 0; height: 100%; width: 100%; border:0; overflow:hidden }
+  </style>
+ </head>
+ <body>
+  $display_mode
+ </body>
+</html>
+EOF
+
+sed -i 's|<div id="top_bar">|<!-- <div id="top_bar">|g' /usr/share/novnc/vnc_lite.html
+sed -i 's|<div id="screen">|--> <div id="screen">|g' /usr/share/novnc/vnc_lite.html
+sed -i "s|document.getElementById('sendCtrlAltDelButton')||g" /usr/share/novnc/vnc_lite.html
+sed -i "s|.onclick = sendCtrlAltDel;||g" /usr/share/novnc/vnc_lite.html
+sed -i 's|status("Connecting");||g' /usr/share/novnc/vnc_lite.html
+
+if [ "${IMAGE_NAME}" = "tiredofit/novnc" ] ; then
+    print_notice "** This is a base image for running X11 apps inside of a container"
+    print_notice "** I've detected there has been no additional configuration - Creating a sample application 'xeyes' for demonstration purposes"
+    mkdir -p /etc/services.available/50-xeyes
+    cat > /etc/services.available/50-xeyes/run <<EOF
+#!/command/with-contenv bash
+
+source /assets/functions/00-container
+prepare_service defaults
+PROCESS_NAME="xeyes"
+
+check_container_initialized
+liftoff
+
+print_start "Starting xeyes"
+export HOME="/data"
+export DISPLAY=":1"
+silent s6-setuidgid ${APP_USER} xeyes
+
+liftoff
+EOF
+    chmod +x /etc/services.available/50-xeyes/run
+fi
+
+liftoff

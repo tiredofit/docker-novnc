@@ -1,0 +1,33 @@
+#!/command/with-contenv bash
+
+source /assets/functions/00-container
+prepare_service defaults
+PROCESS_NAME="x11vnc"
+
+check_container_initialized
+check_service_initialized init
+check_service_initialized 20-openbox
+liftoff
+
+print_start "Starting x11vnc - Listening on port '${VNC_LISTEN_PORT}'"
+sleep 2
+
+if [ -n "${VNC_PASSWORD}" ] ; then
+    vnc_pass="-usepw -passwd ${VNC_PASSWORD}"
+else
+    vnc_pass="-nopw"
+fi
+
+silent /usr/bin/x11vnc \
+                    -xkb \
+                    -noxrecord \
+                    -noxfixes \
+                    -noxdamage \
+                    -display :1 \
+                    ${vnc_pass} \
+                    -wait 5 \
+                    -shared \
+                    -permitfiletransfer \
+                    -tightfilexfer \
+                    -rfbport ${VNC_LISTEN_PORT}
+

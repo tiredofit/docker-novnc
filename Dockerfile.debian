@@ -1,0 +1,40 @@
+FROM tiredofit/nginx:debian-bullseye
+
+ENV APP_USER=app \
+    XDG_RUNTIME_DIR=/data \
+    IMAGE_NAME=tiredofit/novnc \
+    IMAGE_REPO_URL=https://github.com/tiredofit/docker-novnc
+
+RUN set -x && \
+    addgroup --gid 1000 ${APP_USER} && \
+    adduser --uid 1000 \
+            --gid 1000 \
+            --gecos "App User" \
+            --shell /sbin/nologin \
+            --disabled-login \
+            --disabled-password \
+            ${APP_USER} && \
+    apt-get update && \
+    apt-get upgrade && \
+    apt-get install -y --no-install-recommends \
+            binutils \
+            dbus \
+            libssl1.1 \
+            locales \
+            openbox \
+            python3 \
+            websockify \
+            x11vnc \
+            x11-apps \
+            xvfb \
+            && \
+    mkdir -p /usr/share/novnc/utils/websockify && \
+    curl -sSL https://github.com/novnc/noVNC/archive/master.tar.gz | tar xfz - --strip 1 -C /usr/share/novnc && \
+    mv /usr/share/novnc/utils/novnc_proxy /usr/bin/novnc_server && \
+    curl -sSL https://github.com/novnc/websockify/archive/master.tar.gz | tar xfz - --strip 1 -C /usr/share/novnc/utils/websockify && \
+    apt-get autoremove -y && \
+    rm -rf g/var/tmp/* /var/lib/apt/lists/*
+
+EXPOSE 6080 5900
+
+ADD install/ /

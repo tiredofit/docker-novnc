@@ -1,0 +1,3 @@
+#!/command/with-contenv bash
+
+VNC_LISTEN_PORT=${VNC_LISTEN_PORT:-"5900"}

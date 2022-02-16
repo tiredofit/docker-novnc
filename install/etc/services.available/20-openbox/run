@@ -1,0 +1,16 @@
+#!/command/with-contenv bash
+
+source /assets/functions/00-container
+prepare_service defaults
+PROCESS_NAME="openbox"
+
+check_container_initialized
+check_service_initialized init
+check_service_initialized 10-xvfb
+liftoff
+
+print_start "Starting openbox"
+export HOME="/root"
+export DISPLAY=":1"
+export USER="root"
+silent /usr/bin/openbox

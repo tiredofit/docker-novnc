@@ -1,0 +1,15 @@
+#!/command/with-contenv bash
+
+source /assets/functions/00-container
+prepare_service defaults
+PROCESS_NAME="novnc"
+
+check_container_initialized
+check_service_initialized init
+check_service_initialized 30-x11vnc
+liftoff
+
+print_start "Starting NoVNC - Use your webbrowser to visit the port '${NOVNC_LISTEN_PORT}' of the containers IP address."
+silent /usr/bin/novnc_server \
+                --listen ${NOVNC_LISTEN_PORT} \
+                --vnc localhost:${VNC_LISTEN_PORT}

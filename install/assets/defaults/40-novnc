@@ -1,0 +1,4 @@
+#!/command/with-contenv bash
+
+DISPLAY_MODE=${DISPLAY_MODE:-"scale"}
+NOVNC_LISTEN_PORT=${NOVNC_LISTEN_PORT:-"6080"}

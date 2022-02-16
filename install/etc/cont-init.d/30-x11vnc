@@ -1,0 +1,10 @@
+#!/command/with-contenv bash
+
+source /assets/functions/00-container
+PROCESS_NAME="x11vnc"
+
+prepare_service
+
+dbus-uuidgen > /etc/machine-id
+
+liftoff
