@@ -1,3 +1,9 @@
+## 0.0.8 2022-02-17 <dave at tiredofit dot ca>
+
+   ### Changed
+      - Patchup for 0.07
+
+
 ## 0.0.7 2022-02-17 <dave at tiredofit dot ca>
 
    ### Changed
