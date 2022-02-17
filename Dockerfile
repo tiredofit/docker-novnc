@@ -40,5 +40,6 @@ RUN set -x && \
     rm -rf /var/cache/apk/*
 
 EXPOSE 6080 5900
+WORKDIR /data
 
 ADD install/ /

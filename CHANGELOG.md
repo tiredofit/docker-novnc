@@ -1,3 +1,9 @@
+## 0.0.9 2022-02-17 <dave at tiredofit dot ca>
+
+   ### Added
+      - Add WORKDIR /data/
+
+
 ## 0.0.8 2022-02-17 <dave at tiredofit dot ca>
 
    ### Changed
