@@ -1,3 +1,9 @@
+## 0.0.4 2022-02-16 <dave at tiredofit dot ca>
+
+   ### Added
+      - Add /assets/custom support and /assets/custom-scripts support for customization overtop of images
+
+
 ## 0.0.3 2022-02-16 <dave at tiredofit dot ca>
 
    ### Added

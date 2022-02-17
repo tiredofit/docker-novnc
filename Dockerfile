@@ -37,7 +37,7 @@ RUN set -x && \
                 xeyes \
                 && \
     mkdir -p /data && \
-    chown -R ${APP_USER}:${APP_USER} /data
+    chown -R ${APP_USER}:${APP_USER} /data && \
     rm -rf /var/cache/apk/*
 
 EXPOSE 6080 5900

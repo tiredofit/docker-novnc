@@ -35,7 +35,7 @@ RUN set -x && \
     mv /usr/share/novnc/utils/novnc_proxy /usr/bin/novnc_server && \
     curl -sSL https://github.com/novnc/websockify/archive/master.tar.gz | tar xfz - --strip 1 -C /usr/share/novnc/utils/websockify && \
     mkdir -p /data && \
-    chown -R ${APP_USER}:${APP_USER} /data
+    chown -R ${APP_USER}:${APP_USER} /data && \
     apt-get autoremove -y && \
     rm -rf g/var/tmp/* /var/lib/apt/lists/*
 
