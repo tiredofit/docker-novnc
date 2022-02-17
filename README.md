@@ -110,12 +110,13 @@ Be sure to view the following repositories to understand all the customizable op
 
 #### Container Options
 
-| Parameter           | Description                                  | Default    |
-| ------------------- | -------------------------------------------- | ---------- |
-| `RESOLUTION`        | Resolution of the Application via webbrowser | `1280x720` |
-| `NOVNC_LISTEN_PORT` | The Web browsing listening port              | `6080`     |
-| `VNC_LISTEN_PORT`   | The Web browsing listening port              | `5900`     |
-| `VNC_PASSWORD`      | (optional) Basic Password for authentication |            |
+| Parameter           | Description                                                                    | Default    |
+| ------------------- | ------------------------------------------------------------------------------ | ---------- |
+| `DISPLAY_MODE`      | Choose `auto`, `scale`, `remote` or `none` for display resizing to the browser | `scale`    |
+| `RESOLUTION`        | Resolution of the Application via webbrowser                                   | `1280x720` |
+| `NOVNC_LISTEN_PORT` | The Web browsing listening port                                                | `6080`     |
+| `VNC_LISTEN_PORT`   | The Web browsing listening port                                                | `5900`     |
+| `VNC_PASSWORD`      | (optional) Basic Password for authentication                                   |            |
 
 ** For more advanced authentication see the [Nginx](https://github.com/tiredofit/docker-nginx/) image.
 
