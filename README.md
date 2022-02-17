@@ -87,8 +87,6 @@ Images are built primarily for `amd64` architecture, and may also include builds
 * Make [networking ports](#networking) available for public access if necessary
 ### Persistent Storage
 
-The container starts up and reads from `/etc/nginx/nginx.conf` for some basic configuration and to listen on port 73 internally for Nginx Status responses. `/etc/nginx/conf.d` contains a sample configuration file that can be used to customize a nginx server block.
-
 The following directories are used for configuration and can be mapped for persistent storage.
 
 | Directory   | Description                                                                         |
@@ -117,7 +115,7 @@ Be sure to view the following repositories to understand all the customizable op
 | `RESOLUTION`        | Resolution of the Application via webbrowser | `1280x720` |
 | `NOVNC_LISTEN_PORT` | The Web browsing listening port              | `6080`     |
 | `VNC_LISTEN_PORT`   | The Web browsing listening port              | `5900`     |
-| `VNC_PASSWORD` | (optional) Basic Password for authentication | |
+| `VNC_PASSWORD`      | (optional) Basic Password for authentication |            |
 
 ** For more advanced authentication see the [Nginx](https://github.com/tiredofit/docker-nginx/) image.
 
