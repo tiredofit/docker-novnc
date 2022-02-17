@@ -9,7 +9,7 @@ ENV APP_USER=app \
 
 RUN set -x && \
     addgroup -g 1000 ${APP_USER} && \
-    adduser -S -D -H -h /dev/null -s /sbin/nologin -G ${APP_USER} -u 1000 ${APP_USER} && \
+    adduser -S -D -H -h /data -s /sbin/nologin -G ${APP_USER} -u 1000 ${APP_USER} && \
     echo 'http://dl-cdn.alpinelinux.org/alpine/edge/testing' >> /etc/apk/repositories && \
     apk update && \
     apk upgrade && \

@@ -13,6 +13,7 @@ RUN set -x && \
             --gid 1000 \
             --gecos "App User" \
             --shell /sbin/nologin \
+            --hoome /data \
             --disabled-login \
             --disabled-password \
             ${APP_USER} && \

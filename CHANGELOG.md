@@ -1,3 +1,9 @@
+## 0.0.7 2022-02-17 <dave at tiredofit dot ca>
+
+   ### Changed
+      - Update Home directory for app user
+
+
 ## 0.0.6 2022-02-16 <dave at tiredofit dot ca>
 
    ### Changed
