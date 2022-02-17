@@ -27,7 +27,6 @@ RUN set -x && \
     apk add -t .base-fonts \
                 font-noto \
                 font-noto-extra \
-                gtk+3.0-dev \
                 terminus-font \
                 ttf-dejavu \
                 ttf-font-awesome \

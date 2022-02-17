@@ -1,3 +1,9 @@
+## 0.0.5 2022-02-16 <dave at tiredofit dot ca>
+
+   ### Changed
+      - Strip GTK 3 from image
+
+
 ## 0.0.4 2022-02-16 <dave at tiredofit dot ca>
 
    ### Added
