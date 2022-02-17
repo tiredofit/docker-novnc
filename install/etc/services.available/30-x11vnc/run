@@ -20,8 +20,7 @@ fi
 
 silent /usr/bin/x11vnc \
                     -xkb \
-                    -noxrecord \
-                    -noxfixes \
+                    -ncache 10 \
                     -noxdamage \
                     -display :1 \
                     ${vnc_pass} \

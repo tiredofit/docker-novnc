@@ -1,3 +1,9 @@
+## 0.0.6 2022-02-16 <dave at tiredofit dot ca>
+
+   ### Changed
+      - Adjustments to X Configuration for performance and mouse cursor fixes
+
+
 ## 0.0.5 2022-02-16 <dave at tiredofit dot ca>
 
    ### Changed
