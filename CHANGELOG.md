@@ -1,3 +1,9 @@
+## 0.0.10 2022-02-18 <dave at tiredofit dot ca>
+
+   ### Added
+      - Quiet down Nginx and stop creating default page
+
+
 ## 0.0.9 2022-02-17 <dave at tiredofit dot ca>
 
    ### Added
