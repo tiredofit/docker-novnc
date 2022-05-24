@@ -1,4 +1,4 @@
-FROM tiredofit/nginx:alpine-edge
+FROM docker.io/tiredofit/nginx:alpine-edge
 LABEL maintainer="Dave Conroy (github.com/tiredofit)"
 
 ENV APP_USER=app \
