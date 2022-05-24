@@ -7,8 +7,8 @@
 </desktops>
 <applications>
   <application type="normal">
-    <!--<maximized>yes</maximized>-->
-    <fullscreen>yes</fullscreen>
+    <maximized>yes</maximized>
+<!--    <fullscreen>yes</fullscreen>-->
   </application>
 </applications>
 </openbox_config>
