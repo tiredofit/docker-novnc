@@ -1,3 +1,9 @@
+## 0.0.11 2022-05-24 <dave at tiredofit dot ca>
+
+   ### Added
+      - Change FROM in Dockerfile
+
+
 ## 0.0.10 2022-02-18 <dave at tiredofit dot ca>
 
    ### Added

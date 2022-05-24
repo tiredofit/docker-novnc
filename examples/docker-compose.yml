@@ -9,8 +9,8 @@ services:
       - traefik.enable=true
       - traefik.http.routers.novnc-app.rule=Host(`novnc.example.com`)
       - traefik.http.services.novnc-app.loadbalancer.server.port=80
-    #ports:
-      #- 6080:6080 ## If you want to go mainline to NOVnc through a browser
+    ports:
+      - 6080:6080 ## If you want to go mainline to NOVnc through a browser
       #- 5900:5900 ## If you want to use a VNC client to remote control instead of the browser
       
     volumes:

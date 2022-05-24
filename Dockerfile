@@ -1,12 +1,13 @@
-FROM tiredofit/nginx:alpine-edge
+FROM docker.io/tiredofit/nginx:alpine-edge
 LABEL maintainer="Dave Conroy (github.com/tiredofit)"
 
 ENV APP_USER=app \
     XDG_RUNTIME_DIR=/data \
     CONTAINER_ENABLE_PERMISSIONS=TRUE \
     NGINX_ENABLE_CREATE_SAMPLE_HTML=FALSE \
-    IMAGE_NAME=tiredofit/novnc \
-    IMAGE_REPO_URL=https://github.com/tiredofit/docker-novnc
+    NGINX_WEBROOT=/usr/share/novnc \
+    IMAGE_NAME=tiredofit/firefox \
+    IMAGE_REPO_URL=https://github.com/tiredofit/docker-firefox
 
 RUN set -x && \
     addgroup -g 1000 ${APP_USER} && \
@@ -36,8 +37,12 @@ RUN set -x && \
     apk add -t .xeyes-run-deps \
                 xeyes \
                 && \
+    apk add -t .firefox-run-deps \
+                firefox \
+                && \
     mkdir -p /data && \
     chown -R ${APP_USER}:${APP_USER} /data && \
+    sed -i "s|html htm shtml;|html htm shtml js;|g" /etc/nginx/mime.types && \
     rm -rf /var/cache/apk/*
 
 EXPOSE 6080 5900
