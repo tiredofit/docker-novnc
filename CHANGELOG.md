@@ -1,3 +1,9 @@
+## 0.0.12 2022-06-23 <dave at tiredofit dot ca>
+
+   ### Added
+      - Support tiredofit/nginx:6.0.0
+
+
 ## 0.0.11 2022-05-24 <dave at tiredofit dot ca>
 
    ### Added

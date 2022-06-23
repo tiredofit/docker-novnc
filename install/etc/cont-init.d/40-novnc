@@ -6,7 +6,7 @@ PROCESS_NAME="novnc"
 prepare_service
 
 if var_true "${ENABLE_NGINX}" ; then
-    sed -i "s|<NOVNC_LISTEN_PORT>|${NOVNC_LISTEN_PORT}|g" /etc/nginx/conf.d/default.conf
+    sed -i "s|<NOVNC_LISTEN_PORT>|${NOVNC_LISTEN_PORT}|g" /etc/nginx/sites.available/firefox.conf
 fi
 
 case ${DISPLAY_MODE,,} in

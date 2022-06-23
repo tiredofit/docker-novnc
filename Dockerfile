@@ -5,6 +5,7 @@ ENV APP_USER=app \
     XDG_RUNTIME_DIR=/data \
     CONTAINER_ENABLE_PERMISSIONS=TRUE \
     NGINX_ENABLE_CREATE_SAMPLE_HTML=FALSE \
+    NGINX_SITE_ENABLED=firefox \
     NGINX_WEBROOT=/usr/share/novnc \
     IMAGE_NAME=tiredofit/firefox \
     IMAGE_REPO_URL=https://github.com/tiredofit/docker-firefox
