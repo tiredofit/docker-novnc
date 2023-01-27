@@ -8,11 +8,7 @@ ENV APP_USER=app \
     XDG_RUNTIME_DIR=/data \
     CONTAINER_ENABLE_PERMISSIONS=TRUE \
     NGINX_ENABLE_CREATE_SAMPLE_HTML=FALSE \
-<<<<<<< HEAD
     NGINX_SITE_ENABLED="novnc" \
-=======
-    NGINX_SITE_ENABLED=firefox \
->>>>>>> b0d8c74791b68f082be99ec291ac79df47ac9172
     NGINX_WEBROOT=/usr/share/novnc \
     NGINX_WORKER_PROCESSES=1 \
     IMAGE_NAME=tiredofit/firefox \
