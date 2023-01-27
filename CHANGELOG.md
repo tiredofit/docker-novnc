@@ -1,3 +1,9 @@
+## 0.0.16 2023-01-27 <dave at tiredofit dot ca>
+
+   ### Changed
+      - Remove traces to firefox
+
+
 ## 0.0.15 2023-01-27 <dave at tiredofit dot ca>
 
    ### Changed
