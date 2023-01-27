@@ -5,7 +5,7 @@ PROCESS_NAME="custom"
 
 prepare_service
 
-chown -f -R ${APP_USER}:${APP_USER} /data
+chown -f -R "${APP_USER}":"${APP_USER}" /data
 
 custom_files "${CONTAINER_CUSTOM_PATH}" /
 custom_scripts

@@ -6,7 +6,7 @@ PROCESS_NAME="xvfb"
 prepare_service
 
 if [ -f "/tmp/.X1-lock" ] ; then
-    rm /tmp/.X1-lock
+    rm -rf /tmp/.X1-lock
 fi
 
 liftoff

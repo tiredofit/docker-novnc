@@ -1,3 +1,9 @@
+## 0.0.15 2023-01-27 <dave at tiredofit dot ca>
+
+   ### Changed
+      - Additional bugfixes and code cleanup
+
+
 ## 0.0.14 2023-01-26 <dave at tiredofit dot ca>
 
    ### Added

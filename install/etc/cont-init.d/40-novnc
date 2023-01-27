@@ -6,15 +6,11 @@ PROCESS_NAME="novnc"
 prepare_service
 
 if var_true "${ENABLE_NGINX}" ; then
-<<<<<<< HEAD
     update_template /etc/nginx/sites.available/novnc.conf \
                                                             NOVNC_LISTEN_PORT
-=======
-    sed -i "s|<NOVNC_LISTEN_PORT>|${NOVNC_LISTEN_PORT}|g" /etc/nginx/sites.available/firefox.conf
->>>>>>> b0d8c74791b68f082be99ec291ac79df47ac9172
 fi
 
-case ${DISPLAY_MODE,,} in
+case "${DISPLAY_MODE,,}" in
     "scale" )
         display_mode='<iframe src="vnc_lite.html?autoconnect=true&resize=scale"></iframe>'
     ;;
