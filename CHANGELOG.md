@@ -1,3 +1,9 @@
+## 0.0.13 2023-01-26 <dave at tiredofit dot ca>
+
+   ### Added
+      - Modernize Image
+
+
 ## 0.0.12 2022-06-23 <dave at tiredofit dot ca>
 
    ### Added

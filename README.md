@@ -2,7 +2,7 @@
 
 
 [![GitHub release](https://img.shields.io/github/v/tag/tiredofit/docker-novnc?style=flat-square)](https://github.com/tiredofit/docker-novnc/releases/latest)
-[![Build Status](https://img.shields.io/github/workflow/status/tiredofit/docker-novnc/build?style=flat-square)](https://github.com/tiredofit/docker-novnc/actions?query=workflow%3Abuild)
+[![Build Status](https://img.shields.io/github/actions/workflow/status/tiredofit/docker-novnc/main.yml?branch=main&style=flat-square)](https://github.com/tiredofit/docker-novnc/actions)
 [![Docker Stars](https://img.shields.io/docker/stars/tiredofit/novnc.svg?style=flat-square&logo=docker)](https://hub.docker.com/r/tiredofit/novnc/)
 [![Docker Pulls](https://img.shields.io/docker/pulls/tiredofit/novnc.svg?style=flat-square&logo=docker)](https://hub.docker.com/r/tiredofit/novnc/)
 [![Become a sponsor](https://img.shields.io/badge/sponsor-tiredofit-181717.svg?logo=github&style=flat-square)](https://github.com/sponsors/tiredofit)
