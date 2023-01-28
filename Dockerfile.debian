@@ -7,12 +7,17 @@ LABEL maintainer="Dave Conroy (github.com/tiredofit)"
 ENV APP_USER=app \
     XDG_RUNTIME_DIR=/data \
     CONTAINER_ENABLE_PERMISSIONS=TRUE \
+    NGINX_ENABLE_CREATE_SAMPLE_HTML=FALSE \
+    NGINX_SITE_ENABLED="novnc" \
+    NGINX_WEBROOT=/usr/share/novnc \
+    NGINX_WORKER_PROCESSES=1 \
     IMAGE_NAME=tiredofit/novnc \
     IMAGE_REPO_URL=https://github.com/tiredofit/docker-novnc
 
 RUN source /assets/functions/00-container && \
     set -x && \
     sed -i "s|html htm shtml;|html htm shtml js;|g" /etc/nginx/mime.types && \
+    sed -i "/application\/javascript .*js;/d" /etc/nginx/mime.types && \
     addgroup --gid 1000 ${APP_USER} && \
     adduser --uid 1000 \
             --gid 1000 \

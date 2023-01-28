@@ -1,3 +1,9 @@
+## 1.0.0 2023-01-28 <dave at tiredofit dot ca>
+
+   ### Added
+      - Stable release
+
+
 ## 0.0.16 2023-01-27 <dave at tiredofit dot ca>
 
    ### Changed
