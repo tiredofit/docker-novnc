@@ -1,3 +1,9 @@
+## 1.0.1 2023-02-21 <dave at tiredofit dot ca>
+
+   ### Changed
+      - Stop messing around with Nginx mime_types
+
+
 ## 1.0.0 2023-01-28 <dave at tiredofit dot ca>
 
    ### Added

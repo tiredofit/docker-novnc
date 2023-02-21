@@ -16,8 +16,8 @@ ENV APP_USER=app \
 
 RUN source /assets/functions/00-container && \
     set -x && \
-    sed -i "s|html htm shtml;|html htm shtml js;|g" /etc/nginx/mime.types && \
-    sed -i "/application\/javascript .*js;/d" /etc/nginx/mime.types && \
+    #sed -i "s|html htm shtml;|html htm shtml js;|g" /etc/nginx/mime.types && \
+    #sed -i "/application\/javascript .*js;/d" /etc/nginx/mime.types && \
     addgroup --gid 1000 ${APP_USER} && \
     adduser --uid 1000 \
             --gid 1000 \
